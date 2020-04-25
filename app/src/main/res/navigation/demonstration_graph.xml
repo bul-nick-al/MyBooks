@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/demonstration_graph"
+    app:startDestination="@id/mainScreenFragment">
+
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.MainScreenFragment"
+        android:label="main_screen_fragment"
+        tools:layout="@layout/main_screen_fragment" />
+    <fragment
+        android:id="@+id/bookOverviewFragment"
+        android:name="com.example.android.mybooks.view.ui.BookOverviewFragment"
+        android:label="BookOverviewFragment" >
+        <argument
+            android:name="bookTitle"
+            app:argType="string"
+            android:defaultValue=" "
+            />
+    </fragment>
+    <action android:id="@+id/action_global_bookOverviewFragment" app:destination="@id/bookOverviewFragment" />
+</navigation>
