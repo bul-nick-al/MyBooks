@@ -1,7 +1,8 @@
-package com.example.android.mybooks
+package com.example.android.mybooks.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.android.mybooks.R
 
 class MainActivity : AppCompatActivity() {
 

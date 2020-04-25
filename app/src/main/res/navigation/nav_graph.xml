@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_grath"
+    app:startDestination="@id/mainScreen">
+
+    <fragment android:id="@+id/mainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_allBooks"
+            app:destination="@id/allBooks" />
+        <action
+            android:id="@+id/action_mainScreen_to_search"
+            app:destination="@id/search" />
+    </fragment>
+    <fragment android:id="@+id/allBooks" >
+        <action
+            android:id="@+id/action_allBooks_to_myBooks"
+            app:destination="@id/myBooks" />
+    </fragment>
+    <fragment android:id="@+id/myBooks" >
+        <action
+            android:id="@+id/action_myBooks_to_settings"
+            app:destination="@id/settings" />
+    </fragment>
+    <fragment android:id="@+id/settings" />
+    <fragment android:id="@+id/search" />
+    <fragment android:id="@+id/bookOverview" >
+        <action
+            android:id="@+id/action_bookOverview_to_addToList"
+            app:destination="@id/addToList" />
+        <action
+            android:id="@+id/action_bookOverview_to_leaveReview"
+            app:destination="@id/leaveReview" />
+        <action
+            android:id="@+id/action_bookOverview_to_reviews"
+            app:destination="@id/reviews" />
+    </fragment>
+    <action android:id="@+id/action_global_bookOverview" app:destination="@id/bookOverview" />
+    <fragment android:id="@+id/addToList" />
+    <fragment android:id="@+id/leaveReview" />
+    <fragment android:id="@+id/reviews" />
+    <fragment android:id="@+id/finished" >
+        <action
+            android:id="@+id/action_finished_to_current"
+            app:destination="@id/current" />
+    </fragment>
+    <fragment android:id="@+id/current" >
+        <action
+            android:id="@+id/action_current_to_planned"
+            app:destination="@id/planned" />
+    </fragment>
+    <fragment android:id="@+id/planned" />
+</navigation>
