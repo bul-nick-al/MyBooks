@@ -1,52 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_grath"
-    app:startDestination="@id/mainScreen">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_grath"
+    app:startDestination="@id/mainScreenFragment">
 
-    <fragment android:id="@+id/mainScreen" >
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.MainScreenFragment"
+        android:label="MainScreenFragment" >
         <action
-            android:id="@+id/action_mainScreen_to_allBooks"
-            app:destination="@id/allBooks" />
-        <action
-            android:id="@+id/action_mainScreen_to_search"
-            app:destination="@id/search" />
+            android:id="@+id/action_mainScreenFragment_to_allBooksScreenFragment"
+            app:destination="@id/allBooksScreenFragment" />
     </fragment>
-    <fragment android:id="@+id/allBooks" >
+    <fragment
+        android:id="@+id/allBooksScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.AllBooksScreenFragment"
+        android:label="all_books_screen_fragment"
+        tools:layout="@layout/all_books_screen_fragment" >
         <action
-            android:id="@+id/action_allBooks_to_myBooks"
-            app:destination="@id/myBooks" />
+            android:id="@+id/action_allBooksScreenFragment_to_myBooksScreenFregment"
+            app:destination="@id/myBooksScreenFragment" />
     </fragment>
-    <fragment android:id="@+id/myBooks" >
+    <fragment
+        android:id="@+id/myBooksScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.MyBooksScreenFragment"
+        android:label="my_books_screen_fregment_fragment"
+        tools:layout="@layout/my_books_screen_fragment_fragment" >
         <action
-            android:id="@+id/action_myBooks_to_settings"
-            app:destination="@id/settings" />
+            android:id="@+id/action_myBooksScreenFregment_to_settingsScreenFragment"
+            app:destination="@id/settingsScreenFragment" />
+        <action
+            android:id="@+id/action_myBooksScreenFragment_to_finishedBooksFragment"
+            app:destination="@id/finishedBooksFragment" />
     </fragment>
-    <fragment android:id="@+id/settings" />
-    <fragment android:id="@+id/search" />
-    <fragment android:id="@+id/bookOverview" >
+    <fragment
+        android:id="@+id/settingsScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.SettingsScreenFragment"
+        android:label="settings_screen_fragment"
+        tools:layout="@layout/settings_screen_fragment" />
+    <fragment
+        android:id="@+id/finishedBooksFragment"
+        android:name="com.example.android.mybooks.view.ui.FinishedBooksFragment"
+        android:label="finished_books_fragment"
+        tools:layout="@layout/finished_books_fragment" >
         <action
-            android:id="@+id/action_bookOverview_to_addToList"
-            app:destination="@id/addToList" />
-        <action
-            android:id="@+id/action_bookOverview_to_leaveReview"
-            app:destination="@id/leaveReview" />
-        <action
-            android:id="@+id/action_bookOverview_to_reviews"
-            app:destination="@id/reviews" />
+            android:id="@+id/action_finishedBooksFragment_to_currentBooksFragment"
+            app:destination="@id/currentBooksFragment" />
     </fragment>
-    <action android:id="@+id/action_global_bookOverview" app:destination="@id/bookOverview" />
-    <fragment android:id="@+id/addToList" />
-    <fragment android:id="@+id/leaveReview" />
-    <fragment android:id="@+id/reviews" />
-    <fragment android:id="@+id/finished" >
+    <fragment
+        android:id="@+id/currentBooksFragment"
+        android:name="com.example.android.mybooks.view.ui.CurrentBooksFragment"
+        android:label="current_books_fragment"
+        tools:layout="@layout/current_books_fragment" >
         <action
-            android:id="@+id/action_finished_to_current"
-            app:destination="@id/current" />
+            android:id="@+id/action_currentBooksFragment_to_plannedBooksFragment"
+            app:destination="@id/plannedBooksFragment" />
     </fragment>
-    <fragment android:id="@+id/current" >
+    <fragment
+        android:id="@+id/plannedBooksFragment"
+        android:name="com.example.android.mybooks.view.ui.PlannedBooksFragment"
+        android:label="planned_books_fragment"
+        tools:layout="@layout/planned_books_fragment" />
+    <fragment
+        android:id="@+id/bookOverviewFragment"
+        android:name="com.example.android.mybooks.view.ui.BookOverviewFragment"
+        android:label="BookOverviewFragment" >
         <action
-            android:id="@+id/action_current_to_planned"
-            app:destination="@id/planned" />
+            android:id="@+id/action_bookOverviewFragment_to_leaveReviewScreenFragment"
+            app:destination="@id/leaveReviewScreenFragment" />
+        <action
+            android:id="@+id/action_bookOverviewFragment_to_reviewsScreenFragment"
+            app:destination="@id/reviewsScreenFragment" />
+        <action
+            android:id="@+id/action_bookOverviewFragment_to_addToListScreenFragment"
+            app:destination="@id/addToListScreenFragment" />
     </fragment>
-    <fragment android:id="@+id/planned" />
+    <action android:id="@+id/action_global_bookOverviewFragment" app:destination="@id/bookOverviewFragment" />
+    <fragment
+        android:id="@+id/addToListScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.AddToListScreenFragment"
+        android:label="AddToListScreenFragment" />
+    <fragment
+        android:id="@+id/leaveReviewScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.LeaveReviewScreenFragment"
+        android:label="LeaveReviewScreenFragment" />
+    <fragment
+        android:id="@+id/reviewsScreenFragment"
+        android:name="com.example.android.mybooks.view.ui.ReviewsScreenFragment"
+        android:label="ReviewsScreenFragment" />
 </navigation>

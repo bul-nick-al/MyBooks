@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.example.android.mybooks.databinding.MainScreenFragmentBinding
 import com.example.android.mybooks.service.model.Book
 import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.MainScreenViewModel
+import kotlinx.android.synthetic.main.action_bar.*
 
 class MainScreenFragment : Fragment() {
 
@@ -45,6 +47,8 @@ class MainScreenFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context);
         binding.recyclerView.adapter = adapter
         viewModel.loadBooks()
+
+//        (activity as AppCompatActivity?)!!.setSupportActionBar(actionBar)
 
         return binding.root
     }

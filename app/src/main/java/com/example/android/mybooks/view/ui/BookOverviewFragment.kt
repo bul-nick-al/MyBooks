@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.example.android.mybooks.R
@@ -18,7 +20,7 @@ import com.example.android.mybooks.viewmodel.MainScreenViewModel
 class BookOverviewFragment : Fragment() {
 
     private lateinit var binding: BookOverviewFragmentBinding
-    val args: BookOverviewFragmentArgs by navArgs()
+//    val args: BookOverviewFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = BookOverviewFragment()
@@ -43,12 +45,22 @@ class BookOverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.bookTitle.text = args.bookTitle
+//        binding.bookTitle.text = args.bookTitle
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(BookOverviewViewModel::class.java)
+        binding.addToListButton.setOnClickListener {
+            findNavController().navigate(R.id.action_bookOverviewFragment_to_addToListScreenFragment)
+        }
+        binding.leaveReviewButton.setOnClickListener {
+            findNavController().navigate(R.id.action_bookOverviewFragment_to_leaveReviewScreenFragment)
+        }
+        binding.readReviewsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_bookOverviewFragment_to_reviewsScreenFragment)
+        }
+
     }
 
 }
