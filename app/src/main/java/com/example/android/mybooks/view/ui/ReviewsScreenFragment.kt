@@ -6,11 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.databinding.ReviewsScreenFragmentBinding
+import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import com.example.android.mybooks.viewmodel.ReviewsScreenViewModel
 
 class ReviewsScreenFragment : Fragment() {
+
+    private lateinit var binding: ReviewsScreenFragmentBinding
 
     companion object {
         fun newInstance() = ReviewsScreenFragment()
@@ -22,13 +30,28 @@ class ReviewsScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.reviews_screen_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.reviews_screen_fragment,
+            container,
+            false
+        )
+
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.customActionBar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        viewModel = ViewModelProvider(requireActivity()).get(ReviewsScreenViewModel::class.java)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ReviewsScreenViewModel::class.java)
         // TODO: Use the ViewModel
+        binding.customActionBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }

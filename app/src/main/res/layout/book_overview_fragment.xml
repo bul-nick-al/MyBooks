@@ -11,14 +11,32 @@
             type="com.example.android.mybooks.viewmodel.BookOverviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.ui.BookOverviewFragment"
         >
 
+        <Button
+            android:id="@+id/addToListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to list"/>
+        <Button
+            android:id="@+id/leaveReviewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leave a review"/>
+        <Button
+            android:id="@+id/readReviewsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read reviews"/>
+
         <TextView
             android:id="@+id/bookTitle"
+            android:text="Book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +44,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

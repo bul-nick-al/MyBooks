@@ -10,19 +10,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.android.mybooks.R
-import com.example.android.mybooks.databinding.AllBooksScreenFragmentBinding
-import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
+import com.example.android.mybooks.databinding.SettingsScreenFragmentBinding
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
+import com.example.android.mybooks.viewmodel.SettingsScreenViewModel
 
-class AllBooksScreenFragment : Fragment() {
+class SettingsScreenFragment : Fragment() {
 
-    private lateinit var binding: AllBooksScreenFragmentBinding
+    private lateinit var binding: SettingsScreenFragmentBinding
 
     companion object {
-        fun newInstance() = AllBooksScreenFragment()
+        fun newInstance() =
+            SettingsScreenFragment()
     }
 
-    private lateinit var viewModel: AllBooksScreenViewModel
+    private lateinit var viewModel: SettingsScreenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +31,12 @@ class AllBooksScreenFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.all_books_screen_fragment,
+            R.layout.settings_screen_fragment,
             container,
             false
         )
 
-        viewModel = ViewModelProvider(requireActivity()).get(AllBooksScreenViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(SettingsScreenViewModel::class.java)
 
         return binding.root
     }

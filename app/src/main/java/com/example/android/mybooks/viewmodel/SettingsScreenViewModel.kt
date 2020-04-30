@@ -2,6 +2,6 @@ package com.example.android.mybooks.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class MyBooksScreenFregmentViewModel : ViewModel() {
+class SettingsScreenViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

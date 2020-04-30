@@ -8,12 +8,12 @@
 
         <variable
             name="viewmodel"
-            type="com.example.android.mybooks.viewmodel.AllBooksScreenViewModel" />
+            type="com.example.android.mybooks.viewmodel.SettingsScreenViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.ui.AllBooksScreenFragment">
+        tools:context=".view.ui.SettingsScreenFragment">
 
         <TextView
             android:layout_width="match_parent"

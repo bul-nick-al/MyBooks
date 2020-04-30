@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.databinding.CurrentBooksFragmentBinding
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 
 class CurrentBooksFragment : Fragment() {
+
+    private lateinit var binding: CurrentBooksFragmentBinding
 
     companion object {
         fun newInstance() = CurrentBooksFragment()
@@ -22,12 +29,23 @@ class CurrentBooksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.current_books_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.current_books_fragment,
+            container,
+            false
+        )
+
+        viewModel = ViewModelProvider(requireActivity()).get(CurrentBooksViewModel::class.java)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentBooksViewModel::class.java)
+        binding.openButton.setOnClickListener {
+            findNavController().navigate(R.id.action_global_bookOverviewFragment)
+        }
         // TODO: Use the ViewModel
     }
 

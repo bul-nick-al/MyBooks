@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.databinding.PlannedBooksFragmentBinding
 import com.example.android.mybooks.viewmodel.PlannedBooksViewModel
 
 class PlannedBooksFragment : Fragment() {
+
+    private lateinit var binding: PlannedBooksFragmentBinding
 
     companion object {
         fun newInstance() = PlannedBooksFragment()
@@ -22,12 +27,20 @@ class PlannedBooksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.planned_books_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.planned_books_fragment,
+            container,
+            false
+        )
+
+        viewModel = ViewModelProvider(requireActivity()).get(PlannedBooksViewModel::class.java)
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PlannedBooksViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
