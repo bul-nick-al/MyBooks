@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BooksSearchBar">
+        <attr name="onSearch" format="reference"/>
+        <attr name="hint" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -10,15 +10,21 @@
             name="viewmodel"
             type="com.example.android.mybooks.viewmodel.AllBooksScreenViewModel" />
     </data>
-    <FrameLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.ui.AllBooksScreenFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
-
-    </FrameLayout>
+        <com.example.android.mybooks.view.ui.components.BooksSearchBar
+            android:id="@+id/booksSearchBar"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:padding="0dp"
+            app:hint="@string/searchHint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

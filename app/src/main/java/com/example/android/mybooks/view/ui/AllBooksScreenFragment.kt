@@ -13,6 +13,7 @@ import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.AllBooksScreenFragmentBinding
 import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
+import kotlinx.android.synthetic.main.all_books_screen_fragment.*
 
 class AllBooksScreenFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class AllBooksScreenFragment : Fragment() {
         )
 
         viewModel = ViewModelProvider(requireActivity()).get(AllBooksScreenViewModel::class.java)
+        binding.booksSearchBar.onSearch = {}
 
         return binding.root
     }
