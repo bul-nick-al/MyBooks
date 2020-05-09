@@ -68,6 +68,7 @@ dependencies {
     //Network
     implementation 'com.squareup.okhttp3:okhttp:3.10.0' // HTTP Client
     implementation 'com.google.code.gson:gson:2.8.5' // Json Parser
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.8.1' // XML Parser
 
     // Support for connection parser to retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'

@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.AllBooksScreenFragmentBinding
+import com.example.android.mybooks.service.model.Book
+import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import kotlinx.android.synthetic.main.all_books_screen_fragment.*
@@ -37,6 +41,14 @@ class AllBooksScreenFragment : Fragment() {
         )
 
         viewModel = ViewModelProvider(requireActivity()).get(AllBooksScreenViewModel::class.java)
+
+        viewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
+
+        val adapter = BooksRecyclerAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(context);
+        binding.recyclerView.adapter = adapter
+        viewModel.loadBooks()
+
         binding.booksSearchBar.onSearch = {}
 
         return binding.root
@@ -45,6 +57,10 @@ class AllBooksScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // TODO: Use the ViewModel
+    }
+
+    private fun setBooks(dogs: List<Book>) {
+        (binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(dogs)
     }
 
 }
