@@ -12,16 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.databinding.AllBooksScreenFragmentBinding
 import com.example.android.mybooks.service.model.Book
 import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import kotlinx.android.synthetic.main.all_books_screen_fragment.*
+import org.koin.android.ext.android.inject
 
 class AllBooksScreenFragment : Fragment() {
 
     private lateinit var binding: AllBooksScreenFragmentBinding
+    val restClient: RestClient by inject()
 
     companion object {
         fun newInstance() = AllBooksScreenFragment()
