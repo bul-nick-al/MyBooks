@@ -22,10 +22,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '\"https://www.goodreads.com/\"'
+            buildConfigField 'String', 'GOODREADS_API_KEY', '\"cj9PSZ5nNyqmYS48SM2Q\"'
         }
 
         debug {
             buildConfigField 'String', 'BASE_URL', '\"https://www.goodreads.com/\"'
+            buildConfigField 'String', 'GOODREADS_API_KEY', '\"cj9PSZ5nNyqmYS48SM2Q\"'
         }
     }
 
@@ -68,6 +70,7 @@ dependencies {
     //Network
     implementation 'com.squareup.okhttp3:okhttp:3.10.0' // HTTP Client
     implementation 'com.google.code.gson:gson:2.8.5' // Json Parser
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.8.1' // XML Parser
 
     // Support for connection parser to retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -79,4 +82,7 @@ dependencies {
     //Image loader
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //Dependency Injection
+    implementation 'org.koin:koin-android:2.1.5'
 }

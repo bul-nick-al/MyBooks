@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.SearchBooksResponse
 import com.example.android.mybooks.service.model.Book
 
 class BooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var listOfBooks = listOf<Book>()
+    private var listOfBooks = listOf<SearchBooksResponse.Search.Work.BestBook>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
@@ -21,7 +22,7 @@ class BooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         movieViewHolder.bindView(listOfBooks[position])
     }
 
-    fun setBooksList(listOfBooks: List<Book>) {
+    fun setBooksList(listOfBooks: List<SearchBooksResponse.Search.Work.BestBook>) {
         this.listOfBooks = listOfBooks
         notifyDataSetChanged()
     }

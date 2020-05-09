@@ -60,7 +60,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun setBooks(dogs: List<Book>) {
-        (binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(dogs)
+        //(binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(dogs)
     }
 
 }

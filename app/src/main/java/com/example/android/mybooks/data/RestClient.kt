@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RestClient {
@@ -18,8 +19,9 @@ class RestClient {
     private val retrofit = Retrofit.Builder().apply {
         baseUrl(BuildConfig.BASE_URL)
         client(okHttpBuilder.build())
-        addConverterFactory(ScalarsConverterFactory.create())
+        addConverterFactory(SimpleXmlConverterFactory.create())
         addConverterFactory(GsonConverterFactory.create())
+        addConverterFactory(ScalarsConverterFactory.create())
     }.build()
 
     var goodreadsService: GoodreadsService

@@ -7,17 +7,24 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.android.mybooks.R
 import com.example.android.mybooks.data.RestClient
+import com.example.android.mybooks.di.appModule
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var restClient: RestClient
     override fun onCreate(savedInstanceState: Bundle?) {
-        restClient = RestClient()
         super.onCreate(savedInstanceState)
+        startKoin{
+            androidLogger()
+            androidContext(this@MainActivity)
+            modules(appModule)
+        }
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(customActionBar)
