@@ -23,7 +23,7 @@ class BookListItem(context: Context, attrs: AttributeSet) : LinearLayout(context
 
     fun setImage(imageUrl: String) {
         Glide.with(context).load(imageUrl)
-            .placeholder(R.drawable.book_cover).into(bookCoverView)
+            .placeholder(R.drawable.book_cover).fitCenter().into(bookCoverView)
     }
 
     init {
