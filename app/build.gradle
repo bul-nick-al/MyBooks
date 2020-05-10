@@ -85,4 +85,11 @@ dependencies {
 
     //Dependency Injection
     implementation 'org.koin:koin-android:2.1.5'
+
+    //OAuth
+    implementation 'com.github.scribejava:scribejava-apis:6.4.1'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 }
