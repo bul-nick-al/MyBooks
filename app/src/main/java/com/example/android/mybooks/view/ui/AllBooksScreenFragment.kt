@@ -20,6 +20,7 @@ import com.example.android.mybooks.service.model.Book
 import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +28,7 @@ import retrofit2.Response
 class AllBooksScreenFragment : Fragment() {
 
     private lateinit var binding: AllBooksScreenFragmentBinding
-    val restClient: RestClient by inject()
+    val restClient: RestClient by inject { parametersOf(null, null)}
 
     companion object {
         fun newInstance() = AllBooksScreenFragment()

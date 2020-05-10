@@ -1,13 +1,13 @@
 package com.example.android.mybooks.view.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import com.example.android.mybooks.R
-import com.example.android.mybooks.di.appModule
 import com.example.android.mybooks.viewmodel.AuthViewModel
 import com.github.scribejava.core.model.OAuth1RequestToken
 import com.github.scribejava.core.oauth.OAuth10aService
@@ -16,10 +16,6 @@ import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_auth.*
 import org.koin.android.ext.android.inject
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
 
 
 class AuthActivity : AppCompatActivity() {
@@ -29,11 +25,6 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startKoin {
-            androidLogger()
-            androidContext(this@AuthActivity)
-            modules(appModule)
-        }
         setContentView(R.layout.activity_auth)
         setSupportActionBar(toolbar)
         viewModel.requestToken.observe(
@@ -68,8 +59,12 @@ class AuthActivity : AppCompatActivity() {
                                 Flowable.fromCallable {
                                     return@fromCallable authService.getAccessToken(requestToken, token)
                                 }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                                    {
-                                        val token = it
+                                    {authToken ->
+                                        val intent = Intent(this, MainActivity::class.java).apply {
+                                            putExtra("token", authToken.token)
+                                            putExtra("secret", authToken.tokenSecret)
+                                        }
+                                        startActivity(intent)
                                     },
                                     {
                                         val t = it
@@ -78,19 +73,8 @@ class AuthActivity : AppCompatActivity() {
                             }
                     }
                 }
-                /*if (code != null) {
-                    // get access token
-                    // we'll do that in a minute
-                } else if (uri.getQueryParameter("error") != null) {
-                    // show an error message here
-                }*/
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        stopKoin()
     }
 
 }

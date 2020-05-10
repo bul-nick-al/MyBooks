@@ -1,14 +1,11 @@
 package com.example.android.mybooks.view.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.android.mybooks.R
-import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.di.appModule
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.koin.androidContext
@@ -21,13 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startKoin{
-            androidLogger()
-            androidContext(this@MainActivity)
-            modules(appModule)
-        }
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(customActionBar)
         setUpNavigation()
     }
@@ -39,10 +30,5 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView,
             navHostFragment!!.navController
         )
-    }
-
-    override fun onStop() {
-        super.onStop()
-        stopKoin()
     }
 }
