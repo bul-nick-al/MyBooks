@@ -19,4 +19,6 @@
     <string name="reviews">Reviews</string>
     <string name="leaveReview">Leave a review</string>
     <string name="searchHint">Enter book title</string>
+    <string name="redirect_uri">auth</string>
+    <string name="redirect_scheme">mybooks</string>
 </resources>

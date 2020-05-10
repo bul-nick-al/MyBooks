@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,5 +39,10 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView,
             navHostFragment!!.navController
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopKoin()
     }
 }
