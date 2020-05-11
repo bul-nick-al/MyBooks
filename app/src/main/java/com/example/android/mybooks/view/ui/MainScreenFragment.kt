@@ -18,6 +18,7 @@ import com.example.android.mybooks.data.UserBooksResponse
 import com.example.android.mybooks.databinding.MainScreenFragmentBinding
 import com.example.android.mybooks.service.model.Book
 import com.example.android.mybooks.view.adapter.AllBooksRecyclerAdapter
+import com.example.android.mybooks.view.adapter.OwnedBooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.MainScreenViewModel
 import com.example.android.mybooks.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_screen_fragment.*
@@ -52,9 +53,8 @@ class MainScreenFragment : Fragment() {
 
         screenViewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
 
-        val adapter = AllBooksRecyclerAdapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(context);
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerView.adapter = OwnedBooksRecyclerAdapter()
         mainViewModel.userId.observe(viewLifecycleOwner, Observer { id ->
             restClient.goodreadsService.getUserBooks(BuildConfig.GOODREADS_API_KEY, id).enqueue(
                 object : Callback<UserBooksResponse> {
@@ -95,7 +95,7 @@ class MainScreenFragment : Fragment() {
             Glide.with(requireContext()).load(it.book?.imageUrl)
                 .placeholder(R.drawable.book_cover).fitCenter().into(bookCover)
         }
-        //(binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(dogs)
+        (binding.recyclerView.adapter as OwnedBooksRecyclerAdapter).setBooksList(books)
     }
 
 }
