@@ -1,6 +1,7 @@
 package com.example.android.mybooks.view.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -8,6 +9,7 @@ import com.example.android.mybooks.R
 import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.data.UserIdResponse
 import com.example.android.mybooks.di.appModule
+import com.example.android.mybooks.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.ResponseBody
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         setUpNavigation()
         val token = intent.getStringExtra("token")
         val secret = intent.getStringExtra("secret")
+        val viewModel: MainViewModel by viewModels()
+        viewModel.accessToken.value = token
+        viewModel.accessTokenSecret.value = secret
         val restClient: RestClient by inject { parametersOf(token, secret) }
         restClient.goodreadsService.getUserId().enqueue(
             object: Callback<UserIdResponse> {
@@ -39,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<UserIdResponse>, response: Response<UserIdResponse>) {
-                    val id = response.body()
+                    viewModel.userId.value = response.body()?.user?.id
                 }
 
             }
