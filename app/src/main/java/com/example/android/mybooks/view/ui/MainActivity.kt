@@ -5,13 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.RestClient
+import com.example.android.mybooks.data.UserIdResponse
 import com.example.android.mybooks.di.appModule
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.ResponseBody
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
+import org.koin.core.parameter.parametersOf
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +29,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(customActionBar)
         setUpNavigation()
+        val token = intent.getStringExtra("token")
+        val secret = intent.getStringExtra("secret")
+        val restClient: RestClient by inject { parametersOf(token, secret) }
+        restClient.goodreadsService.getUserId().enqueue(
+            object: Callback<UserIdResponse> {
+                override fun onFailure(call: Call<UserIdResponse>, t: Throwable) {
+                    val t = t
+                }
+
+                override fun onResponse(call: Call<UserIdResponse>, response: Response<UserIdResponse>) {
+                    val id = response.body()
+                }
+
+            }
+        )
     }
 
     fun setUpNavigation() {

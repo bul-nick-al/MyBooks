@@ -17,7 +17,7 @@ class RestClient(token: String?, secret: String?) {
 
     private val consumer = token?.let { token ->
         secret?.let { secret ->
-            OkHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET).apply {
+            OkHttpOAuthConsumer("cj9PSZ5nNyqmYS48SM2Q", "QR5Rnf7nDeJaE97RHBGnq7yjes1tNcKd7yn4I9A8AKA").apply {
                 setTokenWithSecret(token, secret)
             }
         }
