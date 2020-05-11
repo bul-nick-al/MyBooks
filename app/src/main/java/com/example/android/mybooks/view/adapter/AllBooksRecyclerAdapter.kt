@@ -7,7 +7,7 @@ import com.example.android.mybooks.R
 import com.example.android.mybooks.data.SearchBooksResponse
 import com.example.android.mybooks.service.model.Book
 
-class BooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AllBooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listOfBooks = listOf<SearchBooksResponse.Search.Work.BestBook>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
