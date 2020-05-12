@@ -85,4 +85,13 @@ dependencies {
 
     //Dependency Injection
     implementation 'org.koin:koin-android:2.1.5'
+
+    //OAuth
+    implementation 'com.github.scribejava:scribejava-apis:6.4.1'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
+    compile 'oauth.signpost:signpost-core:1.2.1.2'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 }

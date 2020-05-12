@@ -5,18 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.android.mybooks.BuildConfig
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.RestClient
+import com.example.android.mybooks.data.UserBooksResponse
 import com.example.android.mybooks.databinding.MainScreenFragmentBinding
 import com.example.android.mybooks.service.model.Book
-import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
+import com.example.android.mybooks.view.adapter.AllBooksRecyclerAdapter
+import com.example.android.mybooks.view.adapter.OwnedBooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.MainScreenViewModel
-import kotlinx.android.synthetic.main.action_bar.*
+import com.example.android.mybooks.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.main_screen_fragment.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainScreenFragment : Fragment() {
 
@@ -26,7 +36,9 @@ class MainScreenFragment : Fragment() {
         fun newInstance() = MainScreenFragment()
     }
 
-    private lateinit var viewModel: MainScreenViewModel
+    private val screenViewModel: MainScreenViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val restClient: RestClient by inject {  parametersOf(null, null) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +51,29 @@ class MainScreenFragment : Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(requireActivity()).get(MainScreenViewModel::class.java)
+        screenViewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
 
-        viewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
+        binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerView.adapter = OwnedBooksRecyclerAdapter()
+        mainViewModel.userId.observe(viewLifecycleOwner, Observer { id ->
+            restClient.goodreadsService.getUserBooks(BuildConfig.GOODREADS_API_KEY, id).enqueue(
+                object : Callback<UserBooksResponse> {
+                    override fun onFailure(call: Call<UserBooksResponse>, t: Throwable) {
+                        throw t
+                        TODO("Not yet implemented")
+                    }
 
-        val adapter = BooksRecyclerAdapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(context);
-        binding.recyclerView.adapter = adapter
-        viewModel.loadBooks()
+                    override fun onResponse(
+                        call: Call<UserBooksResponse>,
+                        response: Response<UserBooksResponse>
+                    ) {
+                        screenViewModel.books.value = response.body()?.reviews
+                    }
+
+                }
+            )
+
+        })
 
 //        (activity as AppCompatActivity?)!!.setSupportActionBar(actionBar)
 
@@ -59,8 +86,16 @@ class MainScreenFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    private fun setBooks(dogs: List<Book>) {
-        //(binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(dogs)
+    private fun setBooks(books: List<UserBooksResponse.Review>) {
+        val currentBook = books.find {book ->
+            book.startedAt != null && book.readAt == null
+        }
+        currentBook?.let {
+            bookTitle.text = "Reading: ${it.book?.title}"
+            Glide.with(requireContext()).load(it.book?.imageUrl)
+                .placeholder(R.drawable.book_cover).fitCenter().into(bookCover)
+        }
+        (binding.recyclerView.adapter as OwnedBooksRecyclerAdapter).setBooksList(books)
     }
 
 }

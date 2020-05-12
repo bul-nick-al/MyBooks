@@ -16,10 +16,10 @@ import com.example.android.mybooks.R
 import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.data.SearchBooksResponse
 import com.example.android.mybooks.databinding.AllBooksScreenFragmentBinding
-import com.example.android.mybooks.service.model.Book
-import com.example.android.mybooks.view.adapter.BooksRecyclerAdapter
+import com.example.android.mybooks.view.adapter.AllBooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.AllBooksScreenViewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +27,7 @@ import retrofit2.Response
 class AllBooksScreenFragment : Fragment() {
 
     private lateinit var binding: AllBooksScreenFragmentBinding
-    val restClient: RestClient by inject()
+    private val restClient: RestClient by inject { parametersOf(null, null)}
 
     companion object {
         fun newInstance() = AllBooksScreenFragment()
@@ -50,7 +50,7 @@ class AllBooksScreenFragment : Fragment() {
 
         viewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
 
-        val adapter = BooksRecyclerAdapter()
+        val adapter = AllBooksRecyclerAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(context);
         binding.recyclerView.adapter = adapter
 
@@ -87,7 +87,7 @@ class AllBooksScreenFragment : Fragment() {
     }
 
     private fun setBooks(books: List<SearchBooksResponse.Search.Work.BestBook>) {
-        (binding.recyclerView.adapter as BooksRecyclerAdapter).setBooksList(books)
+        (binding.recyclerView.adapter as AllBooksRecyclerAdapter).setBooksList(books)
     }
 
 }

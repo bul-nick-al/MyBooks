@@ -4,25 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.mybooks.R
-import com.example.android.mybooks.data.SearchBooksResponse
-import com.example.android.mybooks.service.model.Book
+import com.example.android.mybooks.data.UserBooksResponse
 
-class BooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var listOfBooks = listOf<SearchBooksResponse.Search.Work.BestBook>()
+class OwnedBooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var listOfBooks = listOf<UserBooksResponse.Review>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return BookListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
+        return OwnedBookListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.book_item_vertical, parent, false)
         )
     }
 
     override fun getItemCount(): Int = listOfBooks.size
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        val movieViewHolder = viewHolder as BookListViewHolder
+        val movieViewHolder = viewHolder as OwnedBookListViewHolder
         movieViewHolder.bindView(listOfBooks[position])
     }
 
-    fun setBooksList(listOfBooks: List<SearchBooksResponse.Search.Work.BestBook>) {
+    fun setBooksList(listOfBooks: List<UserBooksResponse.Review>) {
         this.listOfBooks = listOfBooks
         notifyDataSetChanged()
     }
