@@ -8,29 +8,25 @@
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.android.mybooks.view.ui.MainScreenFragment"
-        android:label="MainScreenFragment" >
+        android:label="MainScreenFragment">
         <action
             android:id="@+id/action_mainScreenFragment_to_allBooksScreenFragment"
-            app:popUpTo="@+id/nav_grath"
-            app:popUpToInclusive="true"
             app:destination="@id/allBooksScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/allBooksScreenFragment"
         android:name="com.example.android.mybooks.view.ui.AllBooksScreenFragment"
         android:label="all_books_screen_fragment"
-        tools:layout="@layout/all_books_screen_fragment" >
+        tools:layout="@layout/all_books_screen_fragment">
         <action
             android:id="@+id/action_allBooksScreenFragment_to_myBooksScreenFregment"
-            app:popUpTo="@+id/nav_grath"
-            app:popUpToInclusive="true"
             app:destination="@id/myBooksScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/myBooksScreenFragment"
         android:name="com.example.android.mybooks.view.ui.MyBooksScreenFragment"
         android:label="my_books_screen_fregment_fragment"
-        tools:layout="@layout/my_books_screen_fragment_fragment" >
+        tools:layout="@layout/my_books_screen_fragment_fragment">
         <action
             android:id="@+id/action_myBooksScreenFregment_to_settingsScreenFragment"
             app:destination="@id/settingsScreenFragment" />
@@ -47,7 +43,7 @@
         android:id="@+id/finishedBooksFragment"
         android:name="com.example.android.mybooks.view.ui.FinishedBooksFragment"
         android:label="finished_books_fragment"
-        tools:layout="@layout/finished_books_fragment" >
+        tools:layout="@layout/finished_books_fragment">
         <action
             android:id="@+id/action_finishedBooksFragment_to_currentBooksFragment"
             app:destination="@id/currentBooksFragment" />
@@ -56,7 +52,7 @@
         android:id="@+id/currentBooksFragment"
         android:name="com.example.android.mybooks.view.ui.CurrentBooksFragment"
         android:label="current_books_fragment"
-        tools:layout="@layout/current_books_fragment" >
+        tools:layout="@layout/current_books_fragment">
         <action
             android:id="@+id/action_currentBooksFragment_to_plannedBooksFragment"
             app:destination="@id/plannedBooksFragment" />
@@ -69,7 +65,7 @@
     <fragment
         android:id="@+id/bookOverviewFragment"
         android:name="com.example.android.mybooks.view.ui.BookOverviewFragment"
-        android:label="BookOverviewFragment" >
+        android:label="BookOverviewFragment">
         <argument
             android:name="book_id"
             app:argType="integer" />
@@ -89,7 +85,9 @@
             android:id="@+id/action_bookOverviewFragment_to_addToListScreenFragment"
             app:destination="@id/addToListScreenFragment" />
     </fragment>
-    <action android:id="@+id/action_global_bookOverviewFragment" app:destination="@id/bookOverviewFragment" />
+    <action
+        android:id="@+id/action_global_bookOverviewFragment"
+        app:destination="@id/bookOverviewFragment" />
     <fragment
         android:id="@+id/addToListScreenFragment"
         android:name="com.example.android.mybooks.view.ui.AddToListScreenFragment"
@@ -101,5 +99,9 @@
     <fragment
         android:id="@+id/reviewsScreenFragment"
         android:name="com.example.android.mybooks.view.ui.ReviewsScreenFragment"
-        android:label="ReviewsScreenFragment" />
+        android:label="ReviewsScreenFragment">
+        <argument
+            android:name="reviews_html"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -37,9 +37,14 @@ class AddToListScreenFragment : Fragment() {
             false
         )
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.customActionBar)
-        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+        activity?.let {
+            if (it is AppCompatActivity) {
+                (activity as AppCompatActivity?)!!.setSupportActionBar(binding.customActionBar)
+                (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+            }
+        }
+
 
         viewModel = ViewModelProvider(requireActivity()).get(AddToListScreenViewModel::class.java)
 

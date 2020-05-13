@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -148,9 +147,19 @@ class BookOverviewFragment : Fragment() {
                 )
             }
 
-        });
+            binding.readReviewsButton.setOnClickListener { view ->
+                val bundle = Bundle()
+                bundle.putString("reviews_html", it.reviewsWidget)
 
+                findNavController().navigate(
+                    R.id.action_bookOverviewFragment_to_reviewsScreenFragment,
+                    bundle
+                )
+            }
+
+        });
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -162,10 +171,10 @@ class BookOverviewFragment : Fragment() {
         binding.leaveReviewButton.setOnClickListener {
             findNavController().navigate(R.id.action_bookOverviewFragment_to_leaveReviewScreenFragment)
         }
-        binding.readReviewsButton.setOnClickListener {
-            findNavController().navigate(R.id.action_bookOverviewFragment_to_reviewsScreenFragment)
-        }
-
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.clear()
+        super.onSaveInstanceState(outState)
+    }
 }

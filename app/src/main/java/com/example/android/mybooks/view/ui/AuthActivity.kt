@@ -65,6 +65,7 @@ class AuthActivity : AppCompatActivity() {
                                             putExtra("secret", authToken.tokenSecret)
                                         }
                                         startActivity(intent)
+                                        finish()
                                     },
                                     {
                                         val t = it

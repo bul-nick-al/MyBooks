@@ -1,18 +1,20 @@
 package com.example.android.mybooks.view.ui
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.mybooks.BuildConfig
-
 import com.example.android.mybooks.R
 import com.example.android.mybooks.data.BookResponse
 import com.example.android.mybooks.data.RestClient
@@ -26,6 +28,7 @@ import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class AllBooksScreenFragment : Fragment() {
 
@@ -71,6 +74,11 @@ class AllBooksScreenFragment : Fragment() {
         }
 
         binding.booksSearchBar.onSearch = {
+            val imm =
+                activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val view = activity?.currentFocus
+            imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
             restClient.goodreadsService.searchBooks(BuildConfig.GOODREADS_API_KEY, it).enqueue(
                 object : Callback<SearchBooksResponse> {
                     override fun onFailure(call: Call<SearchBooksResponse>, t: Throwable) {
