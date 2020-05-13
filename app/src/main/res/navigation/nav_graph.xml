@@ -11,6 +11,8 @@
         android:label="MainScreenFragment" >
         <action
             android:id="@+id/action_mainScreenFragment_to_allBooksScreenFragment"
+            app:popUpTo="@+id/nav_grath"
+            app:popUpToInclusive="true"
             app:destination="@id/allBooksScreenFragment" />
     </fragment>
     <fragment
@@ -20,6 +22,8 @@
         tools:layout="@layout/all_books_screen_fragment" >
         <action
             android:id="@+id/action_allBooksScreenFragment_to_myBooksScreenFregment"
+            app:popUpTo="@+id/nav_grath"
+            app:popUpToInclusive="true"
             app:destination="@id/myBooksScreenFragment" />
     </fragment>
     <fragment

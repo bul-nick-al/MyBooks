@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.android.mybooks.BuildConfig
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.BookResponse
 import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.data.UserBooksResponse
 import com.example.android.mybooks.databinding.MainScreenFragmentBinding
@@ -101,22 +102,12 @@ class MainScreenFragment : Fragment() {
 
         val ownedBooksAdapter = binding.recyclerView.adapter as OwnedBooksRecyclerAdapter
         ownedBooksAdapter.clickListener = object : BookClickListener {
-            override fun onBookClick(book: UserBooksResponse.Review.Book?) {
+            override fun onBookClick(book: BookResponse?) {
                 book?.let {
-                    /*val bookIdArgument =
-                        NavArgument.Builder().setType(NavType.IntType).setDefaultValue(null).build()
-
-                    val navController = findNavController()
-                    val navInflater = navController.navInflater
-                    val navGraph = navInflater.inflate(R.id.action_global_bookOverviewFragment)
-                    navGraph.addArgument(it.toString(), bookIdArgument)
-
-                        .navigate(R.id.action_global_bookOverviewFragment)*/
-
                     val bundle = Bundle()
-                    bundle.putInt("book_id", it.id!!)
-                    bundle.putString("book_title", it.title)
-                    bundle.putString("book_image", it.imageUrl)
+                    bundle.putInt("book_id", it.getBookId()!!)
+                    bundle.putString("book_title", it.getBookTitle())
+                    bundle.putString("book_image", it.getBookImageUrl())
 
                     findNavController().navigate(R.id.action_global_bookOverviewFragment, bundle)
                 }
@@ -125,5 +116,10 @@ class MainScreenFragment : Fragment() {
 
         ownedBooksAdapter.setBooksList(books)
     }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
 
 }

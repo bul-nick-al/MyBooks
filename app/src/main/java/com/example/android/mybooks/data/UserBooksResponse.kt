@@ -26,7 +26,7 @@ class UserBooksResponse {
         public var book: Book? = null
 
         @Root(strict = false)
-        class Book {
+        class Book : BookResponse {
             @set:Element
             @get:Element
             public var title: String? = null
@@ -38,6 +38,18 @@ class UserBooksResponse {
             @set:Element
             @get:Element
             public var id: Int? = null
+
+            override fun getBookId(): Int? {
+                return id
+            }
+
+            override fun getBookTitle(): String? {
+                return title
+            }
+
+            override fun getBookImageUrl(): String? {
+                return imageUrl
+            }
         }
     }
 }

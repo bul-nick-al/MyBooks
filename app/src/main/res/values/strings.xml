@@ -24,6 +24,8 @@
 
     <string name="share_book">Share book</string>
 
+    <string name="error_cannot_load_books">Failed to get books. Check your internet connection.</string>
+
     <plurals name="book_overview_rating_text">
         <item quantity="one">%.2f out of 5 based on %d rating</item>
         <item quantity="other">%.2f out of 5 based on %d ratings</item>

@@ -27,7 +27,7 @@ class SearchBooksResponse {
             public var bestBook: BestBook? = null
 
             @Root(strict = false)
-            class BestBook {
+            class BestBook : BookResponse {
 
                 @set:Element
                 @get:Element
@@ -58,6 +58,18 @@ class SearchBooksResponse {
                     @set:Element
                     @get:Element
                     public var name: String? = null
+                }
+
+                override fun getBookId(): Int? {
+                    return id
+                }
+
+                override fun getBookTitle(): String? {
+                    return title
+                }
+
+                override fun getBookImageUrl(): String? {
+                    return imageUrl
                 }
 
             }
