@@ -59,4 +59,9 @@ class MainActivity : AppCompatActivity() {
             navHostFragment!!.navController
         )
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
+    }
 }

@@ -15,4 +15,10 @@ interface GoodreadsService {
 
     @GET("review/list.xml?v=2")
     fun getUserBooks(@Query("key") key: String, @Query("id") userId: Int): Call<UserBooksResponse>
+
+    @GET("book/show.xml")
+    fun getBookDetails(
+        @Query("key") key: String,
+        @Query("id") bookId: Int
+    ): Call<BookDetailsResponse>
 }

@@ -21,4 +21,11 @@
     <string name="searchHint">Enter book title</string>
     <string name="redirect_uri">auth</string>
     <string name="redirect_scheme">mybooks</string>
+
+    <string name="share_book">Share book</string>
+
+    <plurals name="book_overview_rating_text">
+        <item quantity="one">%.2f out of 5 based on %d rating</item>
+        <item quantity="other">%.2f out of 5 based on %d ratings</item>
+    </plurals>
 </resources>

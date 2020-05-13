@@ -6,4 +6,7 @@
     <color name="colorSecondary">#D3FAD6</color>
     <color name="colorSecondaryDark">#D1EFB5</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#777777</color>
+    <color name="colorTextPrimary">#222222</color>
+    <color name="colorBackground">#FAFAFA</color>
 </resources>
