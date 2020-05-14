@@ -15,10 +15,10 @@
         android:layout_height="match_parent"
         tools:context=".view.ui.FinishedBooksFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/finishedBooksRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 </layout>

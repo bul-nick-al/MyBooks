@@ -40,6 +40,10 @@ class UserBooksResponse {
             @get:Element
             public var id: Int? = null
 
+            @set:Element
+            @get:Element
+            public var description: String? = null
+
             override fun getBookId(): Int? {
                 return id
             }

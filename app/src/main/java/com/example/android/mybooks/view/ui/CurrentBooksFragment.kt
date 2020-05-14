@@ -1,29 +1,31 @@
 package com.example.android.mybooks.view.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.CurrentBooksFragmentBinding
+import com.example.android.mybooks.databinding.FinishedBooksFragmentBinding
+import com.example.android.mybooks.view.adapter.MyBooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
+import com.example.android.mybooks.viewmodel.MyBooksViewModelInterface
 
-class CurrentBooksFragment : Fragment() {
-
+class CurrentBooksFragment : LoadShelfDataFragment() {
     private lateinit var binding: CurrentBooksFragmentBinding
+    val screenViewModel: CurrentBooksViewModel by activityViewModels()
 
     companion object {
-        fun newInstance() = CurrentBooksFragment()
+        fun newInstance() = FinishedBooksFragment()
     }
-
-    private lateinit var viewModel: CurrentBooksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,17 +38,26 @@ class CurrentBooksFragment : Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(requireActivity()).get(CurrentBooksViewModel::class.java)
+        binding.currentBooksRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        binding.currentBooksRecyclerView.adapter = getAdapter()
+
+        screenViewModel.books.observe(viewLifecycleOwner, Observer { books -> setBooks(books) })
+
+        loadBooks()
 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        binding.openButton.setOnClickListener {
-            findNavController().navigate(R.id.action_global_bookOverviewFragment)
-        }
-        // TODO: Use the ViewModel
+    override fun getShelfName(): String {
+        return "currently-reading"
     }
 
+    override fun getScreenViewModel(): MyBooksViewModelInterface {
+        return screenViewModel
+    }
+
+    override fun getBindingAdapter(): MyBooksRecyclerAdapter {
+        return binding.currentBooksRecyclerView.adapter as MyBooksRecyclerAdapter
+    }
 }

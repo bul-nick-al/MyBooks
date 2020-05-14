@@ -1,27 +1,30 @@
 package com.example.android.mybooks.view.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.android.mybooks.R
+import com.example.android.mybooks.databinding.CurrentBooksFragmentBinding
 import com.example.android.mybooks.databinding.PlannedBooksFragmentBinding
+import com.example.android.mybooks.view.adapter.MyBooksRecyclerAdapter
+import com.example.android.mybooks.viewmodel.MyBooksViewModelInterface
 import com.example.android.mybooks.viewmodel.PlannedBooksViewModel
 
-class PlannedBooksFragment : Fragment() {
-
+class PlannedBooksFragment : LoadShelfDataFragment() {
     private lateinit var binding: PlannedBooksFragmentBinding
+    val screenViewModel: PlannedBooksViewModel by activityViewModels()
 
     companion object {
-        fun newInstance() = PlannedBooksFragment()
+        fun newInstance() = FinishedBooksFragment()
     }
-
-    private lateinit var viewModel: PlannedBooksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,14 +37,26 @@ class PlannedBooksFragment : Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(requireActivity()).get(PlannedBooksViewModel::class.java)
+        binding.plannedBooksRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        binding.plannedBooksRecyclerView.adapter = getAdapter()
+
+        screenViewModel.books.observe(viewLifecycleOwner, Observer { books -> setBooks(books) })
+
+        loadBooks()
 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+    override fun getScreenViewModel(): MyBooksViewModelInterface {
+        return screenViewModel
     }
 
+    override fun getShelfName(): String {
+        return "to-read"
+    }
+
+    override fun getBindingAdapter(): MyBooksRecyclerAdapter {
+        return binding.plannedBooksRecyclerView.adapter as MyBooksRecyclerAdapter
+    }
 }

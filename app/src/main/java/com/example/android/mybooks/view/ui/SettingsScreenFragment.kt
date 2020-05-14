@@ -1,6 +1,5 @@
 package com.example.android.mybooks.view.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.SettingsScreenFragmentBinding
-import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import com.example.android.mybooks.viewmodel.SettingsScreenViewModel
 
 class SettingsScreenFragment : Fragment() {

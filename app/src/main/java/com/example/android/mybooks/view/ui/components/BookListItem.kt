@@ -1,6 +1,7 @@
 package com.example.android.mybooks.view.ui.components
 
 import android.content.Context
+import android.text.Html
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -19,6 +20,10 @@ class BookListItem(context: Context, attrs: AttributeSet) : LinearLayout(context
 
     fun setAuthor(author: String) {
         authorView.text = author
+    }
+
+    fun setDescription(description: String) {
+        authorView.text = Html.fromHtml(description)
     }
 
     fun setImage(imageUrl: String) {

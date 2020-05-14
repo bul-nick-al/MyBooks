@@ -1,6 +1,5 @@
 package com.example.android.mybooks.view.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.LeaveReviewScreenFragmentBinding
-import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import com.example.android.mybooks.viewmodel.LeaveReviewScreenViewModel
 
 class LeaveReviewScreenFragment : Fragment() {

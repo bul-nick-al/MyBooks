@@ -51,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Author Name"
+                    android:maxLines="3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/titleView"
                     app:layout_constraintTop_toBottomOf="@+id/titleView"
