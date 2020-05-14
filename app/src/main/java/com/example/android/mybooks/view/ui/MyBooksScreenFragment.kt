@@ -57,9 +57,9 @@ class MyBooksScreenFragment : Fragment() {
         val tabLayout = binding.tabLayout
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text =  when (position) {
-                0 -> "FINISHED"
-                1 -> "CURRENT"
-                else -> "PLANNED"
+                0 -> resources.getString(R.string.finished)
+                1 -> resources.getString(R.string.current)
+                else -> resources.getString(R.string.planned)
             }
         }.attach()
 

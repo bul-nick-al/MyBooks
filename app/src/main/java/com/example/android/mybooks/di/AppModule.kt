@@ -10,6 +10,6 @@ val appModule = module {
     single { (token: String?, secret: String?) -> RestClient(token, secret) }
 
     single { ServiceBuilder(BuildConfig.GOODREADS_API_KEY)
-        .apiSecret("QR5Rnf7nDeJaE97RHBGnq7yjes1tNcKd7yn4I9A8AKA")
+        .apiSecret(BuildConfig.GOODREADS_API_SECRET)
         .build(GoodreadsAuth()) }
 }

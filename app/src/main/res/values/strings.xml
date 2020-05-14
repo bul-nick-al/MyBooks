@@ -23,6 +23,12 @@
     <string name="redirect_uri">auth</string>
     <string name="redirect_scheme">mybooks</string>
 
+    <string name="home_reading">Reading: %s</string>
+
+    <string name="finished">FINISHED</string>
+    <string name="current">CURRENT</string>
+    <string name="planned">PLANNED</string>
+
     <string name="adding_to_shelf">Adding book to shelf…</string>
     <string name="removing_from_shelf">Removing book from shelf…</string>
     <string name="success">Success!</string>

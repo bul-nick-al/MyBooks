@@ -19,7 +19,7 @@ class ShelvesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.singleShelfTitle.isChecked = (checkedShelfName == shelf.name)
 
-        itemView.singleShelfTitle.setOnClickListener { view ->
+        itemView.singleShelfTitle.setOnClickListener { _ ->
             shelf.name?.let {
                 clickListener?.onShelfClick(it, checkedShelfName == shelf.name)
             }

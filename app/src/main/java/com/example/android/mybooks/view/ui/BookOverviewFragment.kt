@@ -35,8 +35,6 @@ class BookOverviewFragment : Fragment() {
     private lateinit var binding: BookOverviewFragmentBinding
     private val restClient: RestClient by inject { parametersOf(null, null) }
 
-//    val args: BookOverviewFragmentArgs by navArgs()
-
     companion object {
         fun newInstance() = BookOverviewFragment()
     }

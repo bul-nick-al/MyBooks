@@ -22,6 +22,5 @@
         android:inputType="textMultiLine|textNoSuggestions"
         android:maxLines="2"
         android:scrollHorizontally="false"
-        android:text="Book Title"
         android:textAlignment="center" />
 </LinearLayout>

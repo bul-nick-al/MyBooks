@@ -94,7 +94,7 @@ class MainScreenFragment : Fragment() {
             book.startedAt != null && book.readAt == null
         }
         currentBook?.let {
-            bookTitle.text = "Reading: ${it.book?.title}"
+            bookTitle.text = resources.getString(R.string.home_reading, it.book?.title)
             Glide.with(requireContext()).load(it.book?.imageUrl)
                 .placeholder(R.drawable.book_cover).fitCenter().into(bookCover)
         }

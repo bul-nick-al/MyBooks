@@ -213,7 +213,7 @@ class AddToListScreenFragment : Fragment() {
     fun setCurrentList(reviews: List<UserBooksResponse.Review>) {
         val adapter = binding.addToListShelves.adapter as ShelvesListRecyclerAdapter
 
-        if (reviews.size == 0) {
+        if (reviews.isEmpty()) {
             adapter.setActiveShelf(null)
             return
         }
@@ -222,7 +222,7 @@ class AddToListScreenFragment : Fragment() {
 
         review.shelves?.let { shelvesWrapper ->
             shelvesWrapper.shelves?.let { shelves ->
-                if (shelves.size === 0) {
+                if (shelves.isEmpty()) {
                     adapter.setActiveShelf(null)
                     return;
                 }

@@ -23,11 +23,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'BASE_URL', '\"https://www.goodreads.com/\"'
             buildConfigField 'String', 'GOODREADS_API_KEY', '\"cj9PSZ5nNyqmYS48SM2Q\"'
+            buildConfigField 'String', 'GOODREADS_API_SECRET', '\"QR5Rnf7nDeJaE97RHBGnq7yjes1tNcKd7yn4I9A8AKA\"'
         }
 
         debug {
             buildConfigField 'String', 'BASE_URL', '\"https://www.goodreads.com/\"'
             buildConfigField 'String', 'GOODREADS_API_KEY', '\"cj9PSZ5nNyqmYS48SM2Q\"'
+            buildConfigField 'String', 'GOODREADS_API_SECRET', '\"QR5Rnf7nDeJaE97RHBGnq7yjes1tNcKd7yn4I9A8AKA\"'
         }
     }
 
