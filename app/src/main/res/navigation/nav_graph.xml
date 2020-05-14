@@ -91,7 +91,14 @@
     <fragment
         android:id="@+id/addToListScreenFragment"
         android:name="com.example.android.mybooks.view.ui.AddToListScreenFragment"
-        android:label="AddToListScreenFragment" />
+        android:label="AddToListScreenFragment">
+        <argument
+            android:name="book_id"
+            app:argType="integer" />
+        <argument
+            android:name="book_title"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/leaveReviewScreenFragment"
         android:name="com.example.android.mybooks.view.ui.LeaveReviewScreenFragment"

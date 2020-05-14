@@ -25,20 +25,20 @@ class BookDetailsResponse {
         @get:Element(name = "image_url")
         public var imageUrl: String? = null
 
-        @set:Element(name = "publication_year")
-        @get:Element(name = "publication_year")
+        @set:Element(name = "publication_year", required = false)
+        @get:Element(name = "publication_year", required = false)
         public var year: Int? = null
 
-        @set:Element(name = "description")
-        @get:Element(name = "description")
+        @set:Element(name = "description", required = false)
+        @get:Element(name = "description", required = false)
         public var description: String? = null
 
         @set:Element(name = "average_rating")
         @get:Element(name = "average_rating")
         public var averageRating: Float? = null
 
-        @set:Element(name = "num_pages")
-        @get:Element(name = "num_pages")
+        @set:Element(name = "num_pages", required = false)
+        @get:Element(name = "num_pages", required = false)
         public var pages: Int? = null
 
         @set:Element(name = "ratings_count")

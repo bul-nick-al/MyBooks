@@ -96,6 +96,8 @@ class BookOverviewFragment : Fragment() {
 
         viewModel.book.observe(viewLifecycleOwner, Observer {
             binding.bookOverviewToolbar.title = it.title
+
+            binding.bookOverviewDescription.text = ""
             it.description?.let { description ->
                 binding.bookOverviewDescription.text = Html.fromHtml(description)
             }
@@ -157,6 +159,16 @@ class BookOverviewFragment : Fragment() {
                 )
             }
 
+            binding.addToListButton.setOnClickListener { view ->
+                val bundle = Bundle()
+                bundle.putString("book_title", it.title)
+                bundle.putInt("book_id", it.id!!)
+                findNavController().navigate(
+                    R.id.action_bookOverviewFragment_to_addToListScreenFragment,
+                    bundle
+                )
+            }
+
         });
     }
 
@@ -164,10 +176,6 @@ class BookOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(BookOverviewViewModel::class.java)
-
-        binding.addToListButton.setOnClickListener {
-            findNavController().navigate(R.id.action_bookOverviewFragment_to_addToListScreenFragment)
-        }
         binding.leaveReviewButton.setOnClickListener {
             findNavController().navigate(R.id.action_bookOverviewFragment_to_leaveReviewScreenFragment)
         }

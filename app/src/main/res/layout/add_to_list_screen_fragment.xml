@@ -25,10 +25,12 @@
             app:title="@string/addToList"
             />
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addToListShelves"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:paddingTop="8dp"
+            tools:listitem="@layout/shelf_item" />
 
     </LinearLayout>
 </layout>

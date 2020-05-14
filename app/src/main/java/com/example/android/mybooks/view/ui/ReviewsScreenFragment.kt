@@ -92,23 +92,6 @@ class ReviewsScreenFragment : Fragment() {
                 }
             })
         }
-
-//        reviewsHtml?.replace("width:565px;", "width:100%")
-//        reviewsHtml?.replace(
-//            "width=\"565\"",
-//            "onload=\"this.width=screen.width;this.height=screen.height;\""
-//        )
-//
-//        binding.reviewsWebView.setInitialScale(1)
-//        binding.reviewsWebView.settings.javaScriptEnabled = true
-//        binding.reviewsWebView.settings.loadWithOverviewMode = true;
-//        binding.reviewsWebView.settings.useWideViewPort = true
-//
-//        binding.reviewsWebView.loadData(reviewsHtml, "text/html", "UTF-8")
-        // TODO: Use the ViewModel
-//        binding.customActionBar.setNavigationOnClickListener {
-//            findNavController().popBackStack()
-//        }
     }
 
 }

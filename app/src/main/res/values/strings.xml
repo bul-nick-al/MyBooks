@@ -17,10 +17,15 @@
     <string name="addToList">Add to list</string>
     <string name="myBooks">My books</string>
     <string name="reviews">Reviews</string>
+    <string name="home_screen_books">My books</string>
     <string name="leaveReview">Leave a review</string>
     <string name="searchHint">Enter book title</string>
     <string name="redirect_uri">auth</string>
     <string name="redirect_scheme">mybooks</string>
+
+    <string name="adding_to_shelf">Adding book to shelf…</string>
+    <string name="removing_from_shelf">Removing book from shelf…</string>
+    <string name="success">Success!</string>
 
     <string name="share_book">Share book</string>
 

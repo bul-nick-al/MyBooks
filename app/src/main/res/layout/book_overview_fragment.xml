@@ -20,6 +20,7 @@
             android:id="@+id/bookOverviewAppbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:background="@color/colorPrimary">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -29,6 +30,7 @@
                 app:contentScrim="@color/colorPrimary"
                 app:expandedTitleMarginEnd="8dp"
                 app:expandedTitleMarginStart="8dp"
+
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <View
@@ -56,7 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.AppBarOverlay" />
+                    style="@style/AppTheme.ActionBarTheme"
+                    app:popupTheme="@style/AppTheme.ActionBarTheme" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

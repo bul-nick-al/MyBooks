@@ -1,5 +1,6 @@
 package com.example.android.mybooks.data
 
+import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
@@ -49,6 +50,24 @@ class UserBooksResponse {
 
             override fun getBookImageUrl(): String? {
                 return imageUrl
+            }
+        }
+
+        @set:Element
+        @get:Element
+        public var shelves: Shelves? = null
+
+        @Root(strict = false)
+        class Shelves {
+            @set:ElementList(entry = "shelf", inline = true, required = false)
+            @get:ElementList(entry = "shelf", inline = true, required = false)
+            public var shelves: List<Shelf>? = null
+
+            @Root(strict = false)
+            class Shelf {
+                @get:Attribute(name = "name")
+                @set:Attribute(name = "name")
+                public var name: String? = null
             }
         }
     }
