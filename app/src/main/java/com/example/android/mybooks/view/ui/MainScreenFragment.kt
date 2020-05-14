@@ -1,23 +1,24 @@
 package com.example.android.mybooks.view.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.android.mybooks.BuildConfig
-
 import com.example.android.mybooks.R
+import com.example.android.mybooks.data.BookResponse
 import com.example.android.mybooks.data.RestClient
 import com.example.android.mybooks.data.UserBooksResponse
 import com.example.android.mybooks.databinding.MainScreenFragmentBinding
-import com.example.android.mybooks.service.model.Book
-import com.example.android.mybooks.view.adapter.AllBooksRecyclerAdapter
+import com.example.android.mybooks.view.adapter.BookClickListener
 import com.example.android.mybooks.view.adapter.OwnedBooksRecyclerAdapter
 import com.example.android.mybooks.viewmodel.MainScreenViewModel
 import com.example.android.mybooks.viewmodel.MainViewModel
@@ -27,6 +28,7 @@ import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MainScreenFragment : Fragment() {
 
@@ -38,7 +40,7 @@ class MainScreenFragment : Fragment() {
 
     private val screenViewModel: MainScreenViewModel by activityViewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val restClient: RestClient by inject {  parametersOf(null, null) }
+    private val restClient: RestClient by inject { parametersOf(null, null) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +53,10 @@ class MainScreenFragment : Fragment() {
             false
         )
 
-        screenViewModel.books.observe(viewLifecycleOwner, Observer { books ->  setBooks(books)})
+        screenViewModel.books.observe(viewLifecycleOwner, Observer { books -> setBooks(books) })
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerView.adapter = OwnedBooksRecyclerAdapter()
         mainViewModel.userId.observe(viewLifecycleOwner, Observer { id ->
             restClient.goodreadsService.getUserBooks(BuildConfig.GOODREADS_API_KEY, id).enqueue(
@@ -87,7 +90,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun setBooks(books: List<UserBooksResponse.Review>) {
-        val currentBook = books.find {book ->
+        val currentBook = books.find { book ->
             book.startedAt != null && book.readAt == null
         }
         currentBook?.let {
@@ -95,7 +98,22 @@ class MainScreenFragment : Fragment() {
             Glide.with(requireContext()).load(it.book?.imageUrl)
                 .placeholder(R.drawable.book_cover).fitCenter().into(bookCover)
         }
-        (binding.recyclerView.adapter as OwnedBooksRecyclerAdapter).setBooksList(books)
+
+        val ownedBooksAdapter = binding.recyclerView.adapter as OwnedBooksRecyclerAdapter
+        ownedBooksAdapter.clickListener = object : BookClickListener {
+            override fun onBookClick(book: BookResponse?) {
+                book?.let {
+                    val bundle = Bundle()
+                    bundle.putInt("book_id", it.getBookId()!!)
+                    bundle.putString("book_title", it.getBookTitle())
+                    bundle.putString("book_image", it.getBookImageUrl())
+
+                    findNavController().navigate(R.id.action_global_bookOverviewFragment, bundle)
+                }
+            }
+        }
+
+        ownedBooksAdapter.setBooksList(books)
     }
 
 }

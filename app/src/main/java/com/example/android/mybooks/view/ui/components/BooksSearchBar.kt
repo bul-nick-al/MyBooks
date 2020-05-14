@@ -9,7 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import com.example.android.mybooks.R
 
-class BooksSearchBar(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs, android.R.attr.editTextStyle) {
+class BooksSearchBar(context: Context, attrs: AttributeSet) :
+    ConstraintLayout(context, attrs, android.R.attr.editTextStyle) {
 
     lateinit var onSearch: (keyword: String) -> Unit
     private val textView: EditText
@@ -30,7 +31,8 @@ class BooksSearchBar(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         textView.hint = attributes.getString(R.styleable.BooksSearchBar_hint)
         searchButton.visibility = View.GONE
         textView.doOnTextChanged { text, start, count, after ->
-            if (textView.text.isNotEmpty()) searchButton.visibility = View.VISIBLE else searchButton.visibility =
+            if (textView.text.isNotEmpty()) searchButton.visibility =
+                View.VISIBLE else searchButton.visibility =
                 View.GONE
         }
 

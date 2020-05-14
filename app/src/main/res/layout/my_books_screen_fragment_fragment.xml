@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<data>
+    <data>
 
-    <variable
-        name="viewmodel"
-        type="com.example.android.mybooks.viewmodel.MyBooksScreenFragmentViewModel" />
-</data>
+        <variable
+            name="viewmodel"
+            type="com.example.android.mybooks.viewmodel.MyBooksScreenFragmentViewModel" />
+    </data>
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/customActionBar"
-            android:layout_height="48dp"
             android:layout_width="match_parent"
-            android:background="@color/colorAccent"
-            android:theme="@style/AppTheme.AppBarOverlay"
+            android:layout_height="48dp"
             android:elevation="4dp"
-            app:title="Hui"
-            app:titleTextColor="@color/colorPrimary"
-            />
+            android:theme="@style/AppTheme.AppBarOverlay" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:background="@color/colorPrimaryDark"
-            app:tabTextColor="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:tabTextColor="#ffffff" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.ui.MyBooksScreenFragment"/>
+            tools:context=".view.ui.MyBooksScreenFragment" />
     </LinearLayout>
 </layout>

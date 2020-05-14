@@ -9,6 +9,8 @@ import com.example.android.mybooks.service.model.Book
 
 class AllBooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listOfBooks = listOf<SearchBooksResponse.Search.Work.BestBook>()
+    var clickListener: BookClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
@@ -19,7 +21,7 @@ class AllBooksRecyclerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val movieViewHolder = viewHolder as BookListViewHolder
-        movieViewHolder.bindView(listOfBooks[position])
+        movieViewHolder.bindView(listOfBooks[position], clickListener)
     }
 
     fun setBooksList(listOfBooks: List<SearchBooksResponse.Search.Work.BestBook>) {

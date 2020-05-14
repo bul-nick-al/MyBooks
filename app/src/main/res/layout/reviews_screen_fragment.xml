@@ -20,16 +20,18 @@
             android:id="@+id/customActionBar"
             android:layout_height="48dp"
             android:layout_width="match_parent"
-            android:background="@color/colorSecondaryDark"
             android:theme="@style/AppTheme.AppBarOverlay"
             android:elevation="4dp"
-            app:titleTextColor="@color/colorPrimary"
             app:title="@string/reviews"
             />
-        <TextView
-            android:layout_width="match_parent"
+
+        <WebView
+            android:id="@+id/reviewsWebView"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="8dp" />
+
 
     </LinearLayout>
 </layout>

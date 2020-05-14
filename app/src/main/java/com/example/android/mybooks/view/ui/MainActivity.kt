@@ -25,25 +25,30 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(customActionBar)
         setUpNavigation()
+
         val token = intent.getStringExtra("token")
         val secret = intent.getStringExtra("secret")
+
         val viewModel: MainViewModel by viewModels()
         viewModel.accessToken.value = token
         viewModel.accessTokenSecret.value = secret
+
         val restClient: RestClient by inject { parametersOf(token, secret) }
         restClient.goodreadsService.getUserId().enqueue(
-            object: Callback<UserIdResponse> {
+            object : Callback<UserIdResponse> {
                 override fun onFailure(call: Call<UserIdResponse>, t: Throwable) {
                     val t = t
                 }
 
-                override fun onResponse(call: Call<UserIdResponse>, response: Response<UserIdResponse>) {
+                override fun onResponse(
+                    call: Call<UserIdResponse>,
+                    response: Response<UserIdResponse>
+                ) {
                     viewModel.userId.value = response.body()?.user?.id
                 }
 
@@ -58,5 +63,10 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView,
             navHostFragment!!.navController
         )
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 }

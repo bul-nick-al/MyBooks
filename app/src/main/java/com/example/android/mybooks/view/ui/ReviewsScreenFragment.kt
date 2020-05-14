@@ -1,20 +1,22 @@
 package com.example.android.mybooks.view.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-
 import com.example.android.mybooks.R
 import com.example.android.mybooks.databinding.ReviewsScreenFragmentBinding
-import com.example.android.mybooks.viewmodel.CurrentBooksViewModel
 import com.example.android.mybooks.viewmodel.ReviewsScreenViewModel
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 
 class ReviewsScreenFragment : Fragment() {
 
@@ -37,9 +39,13 @@ class ReviewsScreenFragment : Fragment() {
             false
         )
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.customActionBar)
-        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+        activity?.let {
+            if (it is AppCompatActivity) {
+                it.setSupportActionBar(binding.customActionBar)
+                it.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                it.supportActionBar?.setDisplayShowHomeEnabled(true)
+            }
+        }
 
         viewModel = ViewModelProvider(requireActivity()).get(ReviewsScreenViewModel::class.java)
 
@@ -48,9 +54,43 @@ class ReviewsScreenFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
-        binding.customActionBar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+
+        val reviewsHtml = requireArguments().getString("reviews_html")
+        reviewsHtml?.let {
+            val matcher: Matcher = Pattern.compile("src=\"([^\"]+)\"").matcher(it)
+            matcher.find()
+            val src = matcher.group(1)
+
+            binding.reviewsWebView.loadUrl(src)
+
+            binding.reviewsWebView.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView,
+                    url: String
+                ): Boolean {
+                    view.loadUrl(url);
+                    return false
+                }
+            }
+
+            binding.reviewsWebView.setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(
+                    v: View,
+                    keyCode: Int,
+                    event: KeyEvent
+                ): Boolean {
+                    if (event.action == KeyEvent.ACTION_DOWN) {
+                        val webView = v as WebView
+                        when (keyCode) {
+                            KeyEvent.KEYCODE_BACK -> if (webView.canGoBack()) {
+                                webView.goBack()
+                                return true
+                            }
+                        }
+                    }
+                    return false
+                }
+            })
         }
     }
 
